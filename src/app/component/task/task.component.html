@@ -1,0 +1,48 @@
+<form [formGroup]="tasksForm" (ngSubmit)="onSubmit()" *ngIf="isDataLoad">
+<div fxLayout="row" fxLayoutAlign="stretch" class="tasks-container">
+  <div *ngFor="let column of displayedColumns" fxLayout="column" fxLayoutAlign="space-around center" class="task-day">
+
+    <div *ngIf="isDateColumn(column); then editableCell else readCell"></div>
+    <ng-template #editableCell>
+      <div fxLayout="column" fxLayoutAlign="center center" class="title-cell" [class.week-end]="isWeekEnd(column)">
+        <span>{{column.substring(0, 1)}}</span>
+        <span>{{column.substring(1, 3)}}</span>
+      </div>
+    </ng-template>
+    <ng-template #readCell>
+      <div fxLayout="column" fxLayoutAlign="space-around center" class="title-cell" [class.week-end]="isWeekEnd(column)">
+        <div>{{ column }}</div>
+      </div>
+    </ng-template>
+
+    <div *ngFor="let rowKey of mapColumns | keyvalue" fxLayout="column" fxLayoutAlign="space-around center" class="cell" [class.week-end]="isWeekEnd(column)">
+      <div *ngIf="isDateColumn(column); then editableCell else readCell"></div>
+      <ng-template #editableCell>
+        <input matInput
+             [class.week-end]="isWeekEnd(column)"
+             id="{{rowKey.key}}-{{column}}"
+             formControlName="{{rowKey.key}}-{{column}}"
+             type="number" />
+      </ng-template>
+      <ng-template #readCell>
+        <div>{{ activities.get(rowKey.key)?.name }}</div>
+      </ng-template>
+    </div>
+
+    <div *ngIf="isDateColumn(column); then sumCell else sumTitle"></div>
+    <ng-template #sumCell>
+      <div fxLayout="column" fxLayoutAlign="center center" class="title-cell" [class.week-end]="isWeekEnd(column)">
+        <span>{{ total.get(column) }}</span>
+      </div>
+    </ng-template>
+    <ng-template #sumTitle>
+      <div fxLayout="column" fxLayoutAlign="space-around center" class="title-cell">
+        <div>Total</div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<button mat-button color="primary" type="submit" [disabled]="tasksForm.invalid">Save</button>
+
+</form>

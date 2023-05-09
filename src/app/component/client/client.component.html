@@ -1,0 +1,78 @@
+<table mat-table *ngIf="!addClient" [dataSource]="clients" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id</th>
+    <td mat-cell *matCellDef="let client"> {{client.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name</th>
+    <td mat-cell *matCellDef="let client"> {{client.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="mail">
+    <th mat-header-cell *matHeaderCellDef> mail</th>
+    <td mat-cell *matCellDef="let client"> {{client.mail}} </td>
+  </ng-container>
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef> phone</th>
+    <td mat-cell *matCellDef="let client"> {{client.phone}} </td>
+  </ng-container>
+  <ng-container matColumnDef="siret">
+    <th mat-header-cell *matHeaderCellDef> N° siret</th>
+    <td mat-cell *matCellDef="let client"> {{client.siret}} </td>
+  </ng-container>
+  <ng-container matColumnDef="tva">
+    <th mat-header-cell *matHeaderCellDef> TVA</th>
+    <td mat-cell *matCellDef="let client"> {{client.tva}} </td>
+  </ng-container>
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef> Adress</th>
+    <td mat-cell *matCellDef="let client"> {{client.address}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<div class="formsDesign" fxLayout="column" fxLayoutAlign="space-around center">
+  <form *ngIf="addClient" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+    <mat-card-title>Add a Client</mat-card-title>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+
+      <mat-form-field class="form">
+        <mat-label>Name</mat-label>
+        <input matInput id="name" type="text" formControlName="name">
+      </mat-form-field>
+      <mat-form-field class="form">
+        <mat-label>e-mail</mat-label>
+        <input matInput id="mail" type="text" formControlName="mail">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start none">
+      <mat-form-field class="form">
+        <mat-label>Phone</mat-label>
+        <input matInput id="phone" type="text" formControlName="phone">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between end">
+      <mat-form-field class="form">
+        <mat-label>N°Siret</mat-label>
+        <input matInput id="siret" type="text" formControlName="siret">
+      </mat-form-field>
+      <mat-form-field class="form">
+        <mat-label>Tva</mat-label>
+        <input matInput id="tva" type="text" formControlName="tva">
+      </mat-form-field>
+    </div>
+    <mat-form-field class="form-full-width">
+      <mat-label>Address</mat-label>
+      <input matInput id="address" type="text" formControlName="address">
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button color="basic" type="reset" (click)="onCancel">Cancel</button>
+      <button mat-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>
+
+<button mat-fab (click)="add()" *ngIf="!addClient">
+  <mat-icon>add</mat-icon>
+</button>

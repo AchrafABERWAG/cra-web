@@ -1,0 +1,29 @@
+$back-color: #EEEDF2;
+
+mat-toolbar {
+  padding: 20px;
+  button {
+    margin: 10px;
+  }
+}
+
+.content {
+  background: $back-color;
+  background: white;
+  height: calc(100vh - 130px);
+  border-radius: 10px;
+  margin: 16px;
+  padding: 16px;
+  overflow: auto;
+}
+
+.toolbar-profile {
+  img {
+    border-radius: 50%;
+    height: 55px;
+    padding: 10px;
+  }
+  span {
+    padding: 10px;
+  }
+}

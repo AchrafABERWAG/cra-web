@@ -1,0 +1,66 @@
+<table *ngIf="!addProject" mat-table [dataSource]="projects" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id</th>
+    <td mat-cell *matCellDef="let project"> {{project.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name</th>
+    <td mat-cell *matCellDef="let project"> {{project.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Type</th>
+    <td mat-cell *matCellDef="let project"> {{project.type}} </td>
+  </ng-container>
+  <ng-container matColumnDef="startDate">
+    <th mat-header-cell *matHeaderCellDef> Start Date</th>
+    <td mat-cell *matCellDef="let project"> {{project.startDate}} </td>
+  </ng-container>
+  <ng-container matColumnDef="endDate">
+    <th mat-header-cell *matHeaderCellDef> End Date</th>
+    <td mat-cell *matCellDef="let project"> {{project.endDate}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<div class="formsDesign" fxLayout="row" fxLayoutAlign="space-around center">
+  <form *ngIf="addProject" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <mat-card-title>Add a Project</mat-card-title>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+      <mat-form-field class="form">
+        <mat-label>Name</mat-label>
+        <input matInput id="name" type="text" formControlName="name">
+      </mat-form-field>
+      <mat-form-field class="form">
+        <mat-label>Type</mat-label>
+        <input matInput id="type" type="text" formControlName="type">
+      </mat-form-field>
+    </div>
+    <mat-form-field class="form-full-width">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="startDate" id="startDate" formControlName="startDate">
+        <input matEndDate placeholder="endDate" id="endDate" formControlName="endDate">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-form-field class="form-full-width">
+      <mat-label>Choose a client</mat-label>
+      <mat-select formControlName="clientId">
+        <mat-option *ngFor="let client of clients" [value]="client.id">
+          {{client.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="end end">
+      <button mat-button color="basic" type="reset" (click)="onCancel()">Cancel</button>
+      <button mat-button color="primary" type="submit" [disabled]="projectForm.invalid">Save</button>
+    </div>
+  </form>
+</div>
+
+<button mat-fab (click)="add()" *ngIf="!addProject">
+  <mat-icon>add</mat-icon>
+</button>

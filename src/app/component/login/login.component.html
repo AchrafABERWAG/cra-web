@@ -1,0 +1,58 @@
+<div fxLayout="column" fxLayoutAlign="space-around center">
+  <img class="logo-lg" fxFlex src="assets/committer-top.png" />
+  <form fxFlex [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab class="form" label="Sign in">
+        <ng-template matTabContent>
+          <mat-form-field class="form-full-width" >
+            <mat-label>Mail</mat-label>
+            <input matInput placeholder="Enter your email" formControlName="email">
+          </mat-form-field>
+          <mat-form-field class="form-full-width" >
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter your password"  formControlName="password" type="password">
+          </mat-form-field>
+
+          <mat-error *ngIf="_error.isThrown">{{ _error.msg }}</mat-error>
+
+          <div class="action-button">
+            <button mat-stroked-button color="warn" type="reset">Cancel</button>
+            <button mat-raised-button color="primary">Submit</button>
+          </div>
+          <mat-divider></mat-divider>
+          <button class="form-full-width" mat-button color="primary">Mot de Passe oublié?</button>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab label="Sign up">
+        <ng-template matTabContent>
+          <mat-form-field class="form-full-width" >
+            <mat-label>first Name</mat-label>
+            <input matInput placeholder="Enter your first name" name="first name">
+          </mat-form-field>
+          <mat-form-field class="form-full-width" >
+            <mat-label>Mail</mat-label>
+            <input matInput placeholder="Enter your email" name="mail">
+          </mat-form-field>
+          <mat-form-field class="form-full-width" >
+            <mat-label>Phone</mat-label>
+            <input matInput placeholder="Enter your number" name="phone">
+          </mat-form-field>
+          <mat-form-field class="form-full-width" >
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Enter your address" name="address">
+          </mat-form-field>
+          <mat-form-field class="form-full-width" >
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter a password"  name="password" type="password">
+          </mat-form-field>
+
+          <div class="action-button">
+            <button mat-stroked-button color="warn" type="reset">Cancel</button>
+            <button mat-raised-button color="primary">Submit</button>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+<mat-toolbar class="mat-elevation-z8" fxLayout="row" fxLayoutAlign="space-between center" >
+  <div class="toolbar-logo" fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-icon-button routerLink="/">
+      <img src="assets/committer-rocket.svg" />
+    </button>
+    <h4>COMMITTER CRA</h4>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div *ngIf="authenticationService.isAuthenticated()" class="toolbar-profile" fxLayout="row" fxLayoutAlign="space-between center">
+      <div [matMenuTriggerFor]="menu" fxLayout="row" fxLayoutAlign="space-between center">
+        <h4 fxFlex class="name">{{ profile?.firstName }} {{ profile?.lastName }}</h4>
+        <img fxFlex src="https://www.gravatar.com/avatar/{{getHash(profile?.email || '')}}" alt="profile image" class="avatar"/>
+      </div>
+      <mat-menu #menu="matMenu" fxLayout="column" fxLayoutAlign="space-around start">
+        <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/">
+          <mat-icon>home</mat-icon>
+          <span  fxFlex>Home</span>
+        </button>
+        <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/clients">
+          <mat-icon>hub</mat-icon>
+          <span>Clients</span>
+        </button>
+        <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/projects">
+          <mat-icon>cases</mat-icon>
+          <span>Projects</span>
+        </button>
+        <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/users">
+          <mat-icon>groups</mat-icon>
+          <span>Users</span>
+        </button>
+        <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/activities">
+          <mat-icon>monitoring</mat-icon>
+          <span>Activities</span>
+        </button>
+        <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/tasks">
+          <mat-icon>task_alt</mat-icon>
+          <span>Tasks</span>
+        </button>
+        <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/about">
+          <mat-icon>info</mat-icon>
+          <span>About</span>
+        </button>
+        <button mat-menu-item fxLayout="row" fxLayoutAlign="start center" routerLink="/help">
+          <mat-icon>help</mat-icon>
+          <span>Help</span>
+        </button>
+      </mat-menu>
+
+      <button mat-icon-button (click)="authenticationService.logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<div class="content mat-elevation-z8">
+  <router-outlet></router-outlet>
+</div>
